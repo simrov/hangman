@@ -2,10 +2,10 @@ APP_NAME = hangman
 LIB_NAME = libhangman
 
 CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -I src -MP -MMD
+CPPFLAGS = -Isrc -MP -MMD
 LDFLAGS =
 LDLIBS = -lm
-CC=g++
+CC=gcc
 
 BIN_DIR = bin
 OBJ_DIR = obj
@@ -14,7 +14,7 @@ SRC_DIR = src
 APP_PATH = $(BIN_DIR)/$(APP_NAME)
 LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
 
-SRC_EXT = cpp
+SRC_EXT = c
 
 APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
 APP_OBJECTS = $(APP_SOURCES:%.$(SRC_EXT)=$(OBJ_DIR)/%.o)
@@ -35,10 +35,10 @@ $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
-$(OBJ_DIR)/$(SRC_DIR)/$(APP_NAME)/%.o: $(SRC_DIR)/$(APP_NAME)/%.cpp
+$(OBJ_DIR)/$(SRC_DIR)/$(APP_NAME)/%.o: $(SRC_DIR)/$(APP_NAME)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@ $(LDLIBS)
 
-$(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/%.o: $(SRC_DIR)/$(LIB_NAME)/%.cpp
+$(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/%.o: $(SRC_DIR)/$(LIB_NAME)/%.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@ $(LDLIBS)
 
 .PHONY: clean

@@ -1,4 +1,4 @@
-hangman
+/bin
 *.o
 *.d
 *.a

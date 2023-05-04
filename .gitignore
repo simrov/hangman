@@ -1,0 +1,6 @@
+hangman
+*.o
+*.d
+*.a
+*.kate-swp
+*.vcxproject
